@@ -1,15 +1,26 @@
 'use strict';
 
 const map = L.map('mapid'); //perus leaflet kartta
+let myPos = null;
 
-//Tänne kartan haku nykyisten koordinaattien avulla
-//Ja kartan tileLayerin asettaminen
-
+//Perus tile layer, ruma kuin synti, voi vaihtaa halutessa
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
-map.setView([51.505, -0.09], 13); //Placeholder koordinaatit
+//Paikkatiedot löytyy onnistuneesti
+function success(pos) {
+  myPos = pos.coords;
+//Haetaan kartta nykyisillä koordinaateilla
+  map.setView([myPos.latitude, myPos.longitude], 13);
+}
+
+//Paikkatietoja ei löydy
+function error(err) {
+  console.warn(`ERROR(${err.code}): ${err.message}`);
+}
+
+navigator.geolocation.getCurrentPosition(success, error);
 
 /*
 Markerin, ympyrän ja polygonin lisääminen kartalle:
