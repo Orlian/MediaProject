@@ -1,4 +1,13 @@
 #mapid{
+    margin: 20px;
     height: 480px;
     width: 70%;
+    border-style: groove;
+}
+#weather{
+    margin: 10px;
+    height: 100px;
+    width: 25%;
+    border-style: groove;
+    display: flex;
 }
