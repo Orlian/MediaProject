@@ -31,6 +31,47 @@ function getCurrentWeather(crd) {
 
       })
 }
+
+//Kello
+//Nappi aloittaa laskurin alusta ja pysäyttää sen
+
+let startTime;
+let hours;
+let minutes;
+let seconds;
+
+let timerOn;
+let timerInterval;
+
+function startClock(){
+
+  if (timerOn){
+    clearInterval(timerInterval)
+    timerOn = false;
+    return;
+  }
+
+  startTime = Date.now(); //aloitusaika millisekunteina
+  timerInterval = setInterval(refreshClock,1000);
+  timerOn = true;
+}
+
+function refreshClock(){
+  let milliTime = Date.now() - startTime;         //kulunut aika
+  let secTime = Math.floor(milliTime/1000);    //alkavina sekunteina
+
+  //muunnos tunteihin, minuutteihin ja sekunteihin
+  hours = Math.floor(secTime / 3600);
+  secTime %= 3600;
+  minutes = Math.floor(secTime / 60);
+  seconds = secTime % 60;
+
+  document.querySelector("#clock p").innerHTML = `${hours}h ${minutes}m ${seconds}s`; //sijoita aika
+}
+
+document.getElementById("clockButton").addEventListener("click", startClock);
+
+
 /*
 Markerin, ympyrän ja polygonin lisääminen kartalle:
 
