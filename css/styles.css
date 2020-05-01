@@ -11,3 +11,11 @@
     border-style: groove;
     display: flex;
 }
+#weather_box{
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+}
+p{
+    margin: 10px;
+}

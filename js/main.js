@@ -11,6 +11,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 //Paikkatiedot löytyy onnistuneesti
 function success(pos) {
   myPos = pos.coords;
+  console.log('Lat:', myPos.latitude, 'Lon:', myPos.longitude);
+  getCurrentWeather(myPos);
 //Haetaan kartta nykyisillä koordinaateilla
   map.setView([myPos.latitude, myPos.longitude], 13);
 }
@@ -23,13 +25,17 @@ function error(err) {
 navigator.geolocation.getCurrentPosition(success, error);
 
 function getCurrentWeather(crd) {
-  fetch(`api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&lang=fi&units=metric&appid=ecb61f924f197bcf5abcfe9b08094bca`).
+  fetch(`api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&units=metric&appid=ecb61f924f197bcf5abcfe9b08094bca`).
       then(function(response) {
         return response.json();
       }).
       then(function(data) {
-
-      })
+        console.log(data);
+        document.querySelector('#city').innerHTML = data.name;
+        document.querySelector('#weather_type').innerHTML = data.weather[0].main;
+        document.querySelector('#temperature').innerHTML = data.main.temp;
+        document.querySelector('#humidity').innerHTML = data.main.humidity;
+      });
 }
 
 //Kello
