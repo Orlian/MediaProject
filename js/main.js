@@ -8,13 +8,17 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
+const options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
 //Paikkatiedot löytyy onnistuneesti
 function success(pos) {
   myPos = pos.coords;
-  console.log('Lat:', myPos.latitude, 'Lon:', myPos.longitude);
-  getCurrentWeather(myPos);
 //Haetaan kartta nykyisillä koordinaateilla
   map.setView([myPos.latitude, myPos.longitude], 13);
+  getCurrentWeather(myPos);
 }
 
 //Paikkatietoja ei löydy
@@ -22,20 +26,23 @@ function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
 
-navigator.geolocation.getCurrentPosition(success, error);
+navigator.geolocation.getCurrentPosition(success, error, options);
 
 function getCurrentWeather(crd) {
-  fetch(`api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&units=metric&appid=ecb61f924f197bcf5abcfe9b08094bca`).
-      then(function(response) {
-        return response.json();
+  fetch(`api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&units=metric&APPID=ecb61f924f197bcf5abcfe9b08094bca`).
+      then(function(vastaus) {
+        console.log(vastaus);
+        return vastaus.json();
       }).
       then(function(data) {
         console.log(data);
         document.querySelector('#city').innerHTML = data.name;
-        document.querySelector('#weather_type').innerHTML = data.weather[0].main;
+        document.querySelector('#weather_type').innerHTML = data.weather.main;
         document.querySelector('#temperature').innerHTML = data.main.temp;
         document.querySelector('#humidity').innerHTML = data.main.humidity;
-      });
+      }).catch(function(error){
+        console.log(error.message);
+  })
 }
 
 //Kello
