@@ -1,21 +1,38 @@
 #mapid{
     margin: 20px;
     height: 480px;
-    width: 70%;
+    width: 95%;
     border-style: groove;
-}
-#weather{
-    margin: 10px;
-    height: 100px;
-    width: 25%;
-    border-style: groove;
-    display: flex;
 }
 #weather_box{
     display: flex;
     flex-direction: row;
-    width: 40%;
+    text-align: center;
+    width: 95%;
+    height:auto;
+    border-style: groove;
+    border-color: black;
+    margin: 20px 20px 10px 20px;
+}
+#map_weather_box{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
 }
 p{
-    margin: 10px;
+    margin: 10px 20px 10px 20px;
+}
+/*
+Kun ruudun leveys on alle 820 pikseliä
+ */
+@media only screen and (max-width: 820px){
+    #mapid{
+        margin: 10px;
+    }
+    #weather_box{
+        margin: 10px 10px 5px 10px;
+    }
+    p{
+        margin: 8px;
+    }
 }

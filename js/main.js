@@ -1,5 +1,7 @@
 'use strict';
 
+////// Leaflet kartta //////
+
 const map = L.map('mapid'); //perus leaflet kartta
 let myPos = null;
 
@@ -7,6 +9,10 @@ let myPos = null;
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
+
+/////// Leaflet kartta loppuu ///////
+
+/////// Gps-paikannus ///////
 
 const options = {
   enableHighAccuracy: true,
@@ -28,24 +34,31 @@ function error(err) {
 
 navigator.geolocation.getCurrentPosition(success, error, options);
 
+/////// Gps-paikannus loppuu ///////
+
+/////// Paikallisen sään hakeminen ///////
+
 function getCurrentWeather(crd) {
-  fetch(`api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&units=metric&APPID=ecb61f924f197bcf5abcfe9b08094bca`).
+  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&units=metric&APPID=ecb61f924f197bcf5abcfe9b08094bca`).
       then(function(vastaus) {
         console.log(vastaus);
         return vastaus.json();
       }).
       then(function(data) {
         console.log(data);
-        document.querySelector('#city').innerHTML = data.name;
-        document.querySelector('#weather_type').innerHTML = data.weather.main;
-        document.querySelector('#temperature').innerHTML = data.main.temp;
-        document.querySelector('#humidity').innerHTML = data.main.humidity;
+        document.querySelector('#city').innerHTML = 'City: ' +data.name;
+        document.querySelector('#weather_type').innerHTML = data.weather[0].main + ': ' +data.weather[0].description;
+        document.querySelector('#temperature').innerHTML = 'Temperature: ' + Math.round(data.main.temp) + ' °C';
+        document.querySelector('#humidity').innerHTML = 'Humidity: ' + data.main.humidity + '%';
       }).catch(function(error){
         console.log(error.message);
   })
 }
 
-//Kello
+/////// Paikallisen sään hakeminen loppuu ///////
+
+/////// Kello ////////
+
 //Nappi aloittaa laskurin alusta ja pysäyttää sen
 
 let startTime;
@@ -83,6 +96,8 @@ function refreshClock(){
 }
 
 document.getElementById("clockButton").addEventListener("click", startClock);
+
+/////// Kello loppuu ///////
 
 
 /*
