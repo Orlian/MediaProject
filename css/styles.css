@@ -1,7 +1,7 @@
 #mapid{
-    margin: 20px;
+    margin: 20px 10%;
     height: 480px;
-    width: 95%;
+    width: 80%;
     border-style: groove;
 }
 #weather_box{
@@ -30,7 +30,7 @@ Kun ruudun leveys on alle 820 pikseliä
  */
 @media only screen and (max-width: 820px){
     #mapid{
-        margin: 10px;
+        margin: 10px 10%;
     }
     #weather_box{
         margin: 10px 10px 5px 10px;
