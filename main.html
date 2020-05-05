@@ -19,9 +19,20 @@
 </div>
     <div id="clock">
         <p>Tähän aika</p>
-        <button type="button" id="clockButton">Press</button>
+        <button type="button" id="clock_button">Press</button>
     </div>
-
+    <div id="video_box">
+        <div id="video">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLx0sYbCqOb8TBPRdmBHs5Iftvv9TPboYG" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <form>
+            <input type="text" id="username_box" placeholder="YouTube-username">
+            <button type="button" id="username_button">Press</button>
+            <label for="Playlists">Playlists:</label>
+            <select id="Playlists"></select>
+            <button type="button" id="playlist_button">Press</button>
+        </form>
+    </div>
     <!-- Alla leaflet .js kirjasto -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.3/leaflet.js"></script>
     <script src="js/main.js"></script>

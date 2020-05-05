@@ -51,7 +51,7 @@ function getCurrentWeather(crd) {
         document.querySelector('#temperature').innerHTML = 'Temperature: ' + Math.round(data.main.temp) + ' °C';
         document.querySelector('#humidity').innerHTML = 'Humidity: ' + data.main.humidity + '%';
       }).catch(function(error){
-        console.log(error.message);
+    console.log(error.message);
   })
 }
 
@@ -62,23 +62,19 @@ function getCurrentWeather(crd) {
 //Nappi aloittaa laskurin alusta ja pysäyttää sen
 
 let startTime;
-let hours;
-let minutes;
-let seconds;
-
 let timerOn;
 let timerInterval;
 
 function startClock(){
-
+  //if-lause pysäyttää kellon
   if (timerOn){
-    clearInterval(timerInterval)
+    clearInterval(timerInterval);
     timerOn = false;
     return;
   }
 
   startTime = Date.now(); //aloitusaika millisekunteina
-  timerInterval = setInterval(refreshClock,1000);
+  timerInterval = setInterval(refreshClock,100);
   timerOn = true;
 }
 
@@ -87,19 +83,83 @@ function refreshClock(){
   let secTime = Math.floor(milliTime/1000);    //alkavina sekunteina
 
   //muunnos tunteihin, minuutteihin ja sekunteihin
-  hours = Math.floor(secTime / 3600);
+  let hours = Math.floor(secTime / 3600);
   secTime %= 3600;
-  minutes = Math.floor(secTime / 60);
-  seconds = secTime % 60;
+  let minutes = Math.floor(secTime / 60);
+  let seconds = secTime % 60;
 
-  document.querySelector("#clock p").innerHTML = `${hours}h ${minutes}m ${seconds}s`; //sijoita aika
+  //sijoita aika
+  document.querySelector("#clock p").innerHTML = `${hours}h ${minutes}m ${seconds}s`;
 }
 
-document.getElementById("clockButton").addEventListener("click", startClock);
+document.getElementById("clock_button").addEventListener("click", startClock);
 
 /////// Kello loppuu ///////
 
+/////// YouTube ////////
 
+let key = "AIzaSyC6OSH2PUTmZabXQeuN4kcYiGoBNGnf1Yw";
+let playlists = [];
+//encodeuri()
+
+//hakee käyttäjän ID:n nimen perusteella, alkaa napin painalluksesta
+function getChannelID(){
+  let username = document.getElementById("username_box").value;
+  username = encodeURI(username);
+
+  fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet&forUsername=${username}&key=${key}`).
+      then(function(vastaus){
+        return vastaus.json();
+      }).
+      then(function(data){
+        getPlaylists(data.items[0].id);
+      }).catch(function(error){
+    console.log(error.message);
+  });
+}
+
+//hakee soittolistat käyttäjän ID:n perusteella
+function getPlaylists(userID){
+  fetch(`https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${userID}&maxResults=50&key=${key}`).
+      then(function(vastaus){
+        return vastaus.json();
+      }).
+      then(function(data){
+        playlists = data.items;
+        listPlaylists();
+      }).
+      catch(function(error){
+        console.log(error.message);
+      });
+}
+
+//Lisää soittolistat valintatauluun
+function listPlaylists(){
+  const element = document.getElementById("Playlists");
+  element.innerHTML = "";
+  for (let x = 0; x < playlists.length; x++){
+    let title = playlists[x].snippet.title;
+    let id = playlists[x].id;
+    element.innerHTML += `<option value="${id}">${title}</option>`;
+  }
+}
+
+//Vaihtaa soittolistan
+function replacePlaylist(){
+  const element = document.getElementById("video");
+  const playlistID = document.getElementById("Playlists").value;
+
+  element.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=${playlistID}" 
+  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+
+}
+
+document.getElementById("username_button").addEventListener("click", getChannelID);
+document.getElementById("playlist_button").addEventListener("click", replacePlaylist);
+
+
+
+/////// YouTube loppuu ////////
 /*
 Markerin, ympyrän ja polygonin lisääminen kartalle:
 
