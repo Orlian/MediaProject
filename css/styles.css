@@ -8,7 +8,9 @@ header{
     text-align: center;
 }
 header h1{
-    color: #87ff65;
+    color: #35ff36;
+    font-family: "Playfair Display", serif;
+    font-size: 70px;
 }
 #mapid{
     margin: 20px 10%;
@@ -55,6 +57,7 @@ nav li{
     float: left;
     width: 16%;
     padding: 0px 0px 0px 4px;
+    font-family: Play, serif;
 }
 nav a:link, nav a:visited{
     display: block;
