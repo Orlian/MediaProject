@@ -12,6 +12,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
+//Lisää Google Maps layerin kartalle (dark-mode tyylittelyn kera)
+/*
 let roads = L.gridLayer.googleMutant({
   type: 'roadmap',	// valid values are 'roadmap', 'satellite', 'terrain' and 'hybrid'
   styles: [
@@ -96,10 +98,60 @@ let roads = L.gridLayer.googleMutant({
   ]
 
 }).addTo(map);
-
+*/
 
 
 /////// Leaflet kartta loppuu ///////
+
+/////// Nähtävyyksien haku kartalla ///////
+
+const openTripKey = "5ae2e3f221c38a28845f05b627e4e3f176dbe8ffe53c291569850faa";
+
+function getLandMarks(crd){
+  fetch(`https://api.opentripmap.com/0.1/en/places/radius?radius=20000&lon=${crd.longitude}&lat=${crd.latitude}
+  &format=json&limit=50&apikey=${openTripKey}`).
+      then(function(response){
+        return response.json();
+      }).
+      then(function(landMarks){
+        console.log(landMarks);
+        for(let i = 0; i < landMarks.length; i++){
+          const coordinates = {
+            'lat': landMarks[i].point.lat,
+            'lon': landMarks[i].point.lon
+          };
+          if(landMarks[i].name === '' || landMarks[i].name === null){
+
+          }
+          else{
+            const info = `<h3>${landMarks[i].name}</h3>`;
+            addMarker(coordinates, info, landMarks[i]);
+          }
+        }
+      })
+}
+function addMarker(coordinates, info, landMark) {
+  L.marker([coordinates.lat, coordinates.lon])
+      .addTo(map)
+      .bindPopup(info)
+      .on('click', function(){
+        //Tänne jotain hauskaa vielä
+  });
+}
+const redIcon = new L.Icon({
+  iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+function youAreHere(coordinates) {
+  L.marker([coordinates.latitude, coordinates.longitude], {icon: redIcon}).addTo(map).bindPopup(`<h3>You are here!</h3>`)
+      .openPopup();
+}
+
+/////// Nähtävyyksien haku loppuu ////////
 
 /////// Gps-paikannus ///////
 
@@ -114,6 +166,8 @@ function success(pos) {
 //Haetaan kartta nykyisillä koordinaateilla
   map.setView([myPos.latitude, myPos.longitude], 13);
   getCurrentWeather(myPos);
+  getLandMarks(myPos);
+  youAreHere(myPos);
 }
 
 //Paikkatietoja ei löydy
@@ -138,6 +192,7 @@ function getCurrentWeather(crd) {
         document.querySelector('#city').innerHTML = data.name;
         document.querySelector('#weather_type').innerHTML = data.weather[0].main + ': ' +data.weather[0].description;
         document.querySelector('#temperature').innerHTML = 'Temperature: ' + Math.round(data.main.temp) + ' °C';
+        document.querySelector('#feels_like').innerHTML = 'Feels like: ' + Math.round(data.main.feels_like) + '°C';
         document.querySelector('#humidity').innerHTML = 'Humidity: ' + data.main.humidity + '%';
       }).catch(function(error){
     console.log(error.message);
