@@ -1,3 +1,4 @@
+
 #mapid{
     margin: 20px 10%;
     height: 480px;
@@ -21,6 +22,31 @@
 }
 #city{
     font-weight: bold;
+}
+#navigation_bar{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+nav ul{
+    list-style-type: none;
+    padding: 3%;
+}
+nav li{
+    display: inline;
+    float: left;
+}
+nav a:link, nav a:visited{
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 10px 10px 10px;
+    background-color: #bfc0c0;
+    width: 95%;
+}
+nav a:hover{
+    background-color: #aceb98;;
 }
 p{
     margin: 10px 20px 10px 20px;
