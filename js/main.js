@@ -242,16 +242,15 @@ document.getElementById("clock_button").addEventListener("click", startClock);
 
 /////// YouTube ////////
 
-let key = "AIzaSyC6OSH2PUTmZabXQeuN4kcYiGoBNGnf1Yw";
+const youtubeKey = "AIzaSyC6OSH2PUTmZabXQeuN4kcYiGoBNGnf1Yw";
 let playlists = [];
-//encodeuri()
 
 //hakee käyttäjän ID:n nimen perusteella, alkaa napin painalluksesta
 function getChannelID(){
   let username = document.getElementById("username_box").value;
   username = encodeURI(username);
 
-  fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet&forUsername=${username}&key=${key}`).
+  fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet&forUsername=${username}&key=${youtubeKey}`).
       then(function(vastaus){
         return vastaus.json();
       }).
@@ -264,7 +263,7 @@ function getChannelID(){
 
 //hakee soittolistat käyttäjän ID:n perusteella
 function getPlaylists(userID){
-  fetch(`https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${userID}&maxResults=50&key=${key}`).
+  fetch(`https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${userID}&maxResults=50&key=${youtubeKey}`).
       then(function(vastaus){
         return vastaus.json();
       }).
@@ -281,6 +280,7 @@ function getPlaylists(userID){
 function listPlaylists(){
   const element = document.getElementById("Playlists");
   element.innerHTML = "";
+
   for (let x = 0; x < playlists.length; x++){
     let title = playlists[x].snippet.title;
     let id = playlists[x].id;
@@ -301,9 +301,8 @@ function replacePlaylist(){
 document.getElementById("username_button").addEventListener("click", getChannelID);
 document.getElementById("playlist_button").addEventListener("click", replacePlaylist);
 
-
-
 /////// YouTube loppuu ////////
+
 /*
 Markerin, ympyrän ja polygonin lisääminen kartalle:
 
