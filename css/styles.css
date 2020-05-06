@@ -1,4 +1,6 @@
-
+body{
+    background-color: #2a2b2e;
+}
 #mapid{
     margin: 20px 10%;
     height: 480px;
@@ -14,6 +16,7 @@
     border-style: groove;
     border-color: black;
     margin: 20px 20px 10px 20px;
+    background-color: #aceb98;
 }
 #map_weather_box{
     display: flex;
@@ -28,6 +31,8 @@
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
+    border-style: groove;
+    border-color: black;
 }
 nav ul{
     list-style-type: none;
@@ -44,6 +49,7 @@ nav a:link, nav a:visited{
     padding: 10px 10px 10px 10px;
     background-color: #bfc0c0;
     width: 95%;
+    color: #2a2b2e;
 }
 nav a:hover{
     background-color: #aceb98;;
