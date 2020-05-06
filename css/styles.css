@@ -12,6 +12,28 @@ header h1{
     font-family: "Playfair Display", serif;
     font-size: 70px;
 }
+.collapsible {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    transition: max-height 0.2s ease-out;
+}
+.active, .collapsible:hover {
+    background-color: #ccc;
+}
+
 #mapid{
     margin: 20px 10%;
     height: 480px;
