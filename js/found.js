@@ -178,3 +178,41 @@ function error(err) {
 navigator.geolocation.getCurrentPosition(success, error, options);
 
 /////// Gps-paikannus loppuu ///////
+/////// Kello ////////
+
+//Nappi aloittaa laskurin alusta ja pysäyttää sen
+
+let startTime;
+let timerOn;
+let timerInterval;
+
+function startClock(){
+  //if-lause pysäyttää kellon
+  if (timerOn){
+    clearInterval(timerInterval);
+    timerOn = false;
+    return;
+  }
+
+  startTime = Date.now(); //aloitusaika millisekunteina
+  timerInterval = setInterval(refreshClock,100);
+  timerOn = true;
+}
+
+function refreshClock(){
+  let milliTime = Date.now() - startTime;         //kulunut aika
+  let secTime = Math.floor(milliTime/1000);    //alkavina sekunteina
+
+  //muunnos tunteihin, minuutteihin ja sekunteihin
+  let hours = Math.floor(secTime / 3600);
+  secTime %= 3600;
+  let minutes = Math.floor(secTime / 60);
+  let seconds = secTime % 60;
+
+  //sijoita aika
+  document.querySelector("#clock p").innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+}
+
+document.getElementById("clock_button").addEventListener("click", startClock);
+
+/////// Kello loppuu ///////
