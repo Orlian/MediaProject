@@ -1,5 +1,5 @@
 
-////// Collapsible elementti EI TOIMI  //////
+////// Collapsible elementti  //////
 let coll = document.getElementsByClassName("collapsible");
 let i;
 

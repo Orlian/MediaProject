@@ -132,10 +132,10 @@ function getLandMarks(crd){
 }
 function addMarker(coordinates, info, landMark) {
   L.marker([coordinates.lat, coordinates.lon])
-      .addTo(map)
-      .bindPopup(info)
-      .on('click', function(){
-        //Tänne jotain hauskaa vielä
+  .addTo(map)
+  .bindPopup(info)
+  .on('click', function(){
+    //Tänne jotain hauskaa vielä
   });
 }
 const redIcon = new L.Icon({
@@ -148,8 +148,8 @@ const redIcon = new L.Icon({
 });
 function youAreHere(coordinates) {
   L.marker([coordinates.latitude, coordinates.longitude], {icon: redIcon}).addTo(map)
-    .bindPopup(`<h3>You are here!<br/>Lat: ${coordinates.latitude} Lon: ${coordinates.longitude}</h3>`)
-      .openPopup();
+  .bindPopup(`<h3>You are here!<br/>Lat: ${coordinates.latitude} Lon: ${coordinates.longitude}</h3>`)
+  .openPopup();
 }
 
 /////// Nähtävyyksien haku loppuu ////////
