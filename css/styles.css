@@ -62,7 +62,7 @@ h1{
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    margin-left: 1%;
+    margin-left: 0.4%;
 
 }
 nav ul{
@@ -74,7 +74,7 @@ nav li{
     display: inline-block;
     float: left;
     width: 16%;
-    padding: 0px 0px 0px 4px;
+    padding: 0 0 0 4px;
     font-family: Play, serif;
 }
 nav a:link, nav a:visited{
@@ -85,7 +85,6 @@ nav a:link, nav a:visited{
     background-color: #5a5a66;
     width: 95%;
     color: #2a2b2e;
-
 }
 nav a:hover{
     background-color: #aceb98;;
@@ -115,8 +114,46 @@ p{
     margin-left: 44%;
 }
 #video_box{
-    padding: 5%;
+    padding-top: 4%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
 }
+#help_video{
+    padding-left: 5%;
+    padding-bottom: 1%;
+}
+#video{
+    padding-left: 5%;
+}
+form{
+    padding-left: 55%;
+    padding-bottom: 5%;
+    color: #aceb98;
+}
+
+#username_box{
+    height: 25px;
+    width: 40%;
+    margin-right: 5px;
+    border-radius: 2px;
+}
+
+#username_button{
+    height: 30px;
+    margin-right: 5px;
+    border-radius: 2px;
+    background-color: #aceb98;
+}
+#playlist_button{
+    height: 30px;
+    margin-right: 1px;
+    border-radius: 2px;
+    width: 50px;
+    margin-left: 5px;
+}
+
 #kysymys_list ul {
     list-style-type: none;
     padding: 1% 6% 3% 2%;
@@ -172,9 +209,18 @@ p{
     color: #bfc0c0;
     font-family: Play, serif;
 }
+.pohja p{
+    padding-left: 1%;
+    color: #bfc0c0;
+}
 
-.pohja a:link{
+.pohja a{
     text-decoration: none;
+    color: #bfc0c0;
+    font-size: larger;
+}
+.pohja a:hover{
+    color: #aceb98;
 }
 
 /*

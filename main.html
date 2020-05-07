@@ -41,25 +41,26 @@
 </div>
 
     <div id="video_box">
+        <div id="help_video">
+            <div id="helppi">
+                <video src="video/kolumbusvideo.mp4" width="640" height="360" controls>Aloita tästä</video>
+            </div>
+        </div>
         <div id="video">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PLx0sYbCqOb8TBPRdmBHs5Iftvv9TPboYG" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         </div>
-        <form>
-            <input type="text" id="username_box" placeholder="YouTube-username">
-            <button type="button" id="username_button">Press</button>
-            <label for="Playlists">Playlists:</label>
-            <select id="Playlists">
-                <option value="Empty">Empty</option>
-            </select>
-            <button type="button" id="playlist_button">Press</button>
-        </form>
     </div>
+<form>
+    <input type="text" id="username_box" placeholder="YouTube-username">
+    <button type="button" id="username_button">Press</button>
+    <label for="Playlists">Playlists:</label>
+    <select id="Playlists">
+        <option value="Empty">Empty</option>
+    </select>
+    <button type="button" id="playlist_button">Press</button>
+</form>
 
-<div id="help_video">
-    <div id="helppi">
-        <video src="video/kolumbusvideo.mp4" width="640" height="360" controls>Aloita tästä</video>
-    </div>
-</div>
+
 
     <!-- Alla leaflet .js kirjasto -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.3/leaflet.js"></script>
