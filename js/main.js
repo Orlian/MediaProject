@@ -266,7 +266,7 @@ function getChannelID(){
   });
 }
 
-//hakee soittolistat käyttäjän ID:n perusteella
+//hakee soittolistat käyttäjän ID:n perusteella ja tallentaa muistiin
 function getPlaylists(userID){
   fetch(`https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${userID}&maxResults=50&key=${youtubeKey}`).
       then(function(vastaus){
@@ -274,6 +274,7 @@ function getPlaylists(userID){
       }).
       then(function(data){
         playlists = data.items;
+        sessionStorage.setItem('lastPlaylists', JSON.stringify(playlists));
         listPlaylists();
       }).
       catch(function(error){
@@ -287,20 +288,42 @@ function listPlaylists(){
   element.innerHTML = "";
 
   for (let x = 0; x < playlists.length; x++){
-    let title = playlists[x].snippet.title;
-    let id = playlists[x].id;
-    element.innerHTML += `<option value="${id}">${title}</option>`;
+      let title = playlists[x].snippet.title;
+      let id = playlists[x].id;
+      element.innerHTML += `<option value="${id}">${title}</option>`;
   }
 }
 
-//Vaihtaa soittolistan
+//Vaihtaa soittolistan napin painalluksesta
 function replacePlaylist(){
   const element = document.getElementById("video");
   const playlistID = document.getElementById("Playlists").value;
-
+  sessionStorage.setItem('lastUsedPlaylist', playlistID);
   element.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=${playlistID}" 
   frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+}
 
+//hakee viimeksi käytetyn soittolistan muistista
+let lastPlaylists = JSON.parse(sessionStorage.getItem('lastPlaylists'));
+let lastUsedPlaylist = sessionStorage.getItem('lastUsedPlaylist');
+
+if (lastPlaylists != null && lastUsedPlaylist != null){
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const video = document.getElementById("video");
+    const playlistID = lastUsedPlaylist;
+
+    video.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=${playlistID}" 
+    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+
+    const element = document.getElementById("Playlists");
+    element.innerHTML = "";
+
+    for (let x = 0; x < lastPlaylists.length; x++){
+      let title = lastPlaylists[x].snippet.title;
+      let id = lastPlaylists[x].id;
+      element.innerHTML += `<option value="${id}">${title}</option>`;
+    }
+  });
 }
 
 document.getElementById("username_button").addEventListener("click", getChannelID);
