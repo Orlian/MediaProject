@@ -124,7 +124,7 @@ function getLandMarks(crd){
 
           }
           else{
-            const info = `<h3>${landMarks[i].name}</h3>`;
+            const info = `<h3>${landMarks[i].name}<br/>Lat: ${coordinates.lat} Lon: ${coordinates.lon}</h3>`;
             addMarker(coordinates, info, landMarks[i]);
           }
         }
@@ -147,7 +147,8 @@ const redIcon = new L.Icon({
   shadowSize: [41, 41]
 });
 function youAreHere(coordinates) {
-  L.marker([coordinates.latitude, coordinates.longitude], {icon: redIcon}).addTo(map).bindPopup(`<h3>You are here!</h3>`)
+  L.marker([coordinates.latitude, coordinates.longitude], {icon: redIcon}).addTo(map)
+    .bindPopup(`<h3>You are here!<br/>Lat: ${coordinates.latitude} Lon: ${coordinates.longitude}</h3>`)
       .openPopup();
 }
 
