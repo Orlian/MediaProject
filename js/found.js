@@ -166,7 +166,6 @@ function success(pos) {
   myPos = pos.coords;
 //Haetaan kartta nykyisillä koordinaateilla
   map.setView([myPos.latitude, myPos.longitude], 13);
-  getCurrentWeather(myPos);
   getLandMarks(myPos);
   youAreHere(myPos);
 }
