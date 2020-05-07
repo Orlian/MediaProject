@@ -27,8 +27,8 @@ h1{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 95%;
-    height:auto;
+    width: 50%;
+    height:95%;
     border-style: groove;
     border-color: black;
     margin: 20px 20px 10px 20px;
@@ -127,6 +127,14 @@ p{
 }
 .tekijat ul{
     list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.galleria ul{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
 
 /*
