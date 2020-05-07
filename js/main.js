@@ -194,7 +194,10 @@ function getCurrentWeather(crd) {
         document.querySelector('#weather_type').innerHTML = data.weather[0].main + ': ' +data.weather[0].description;
         document.querySelector('#temperature').innerHTML = 'Temperature: ' + Math.round(data.main.temp) + ' °C';
         document.querySelector('#feels_like').innerHTML = 'Feels like: ' + Math.round(data.main.feels_like) + '°C';
+        document.querySelector('#wind_speed').innerHTML = 'Wind speed: ' + data.wind.speed + 'm/s';
         document.querySelector('#humidity').innerHTML = 'Humidity: ' + data.main.humidity + '%';
+        document.querySelector('#air_pressure').innerHTML = 'Air pressure: ' + data.main.pressure + 'hPa';
+        document.querySelector('#visibility').innerHTML = 'Visibility: ' + (data.visibility / 1000) + 'km';
       }).catch(function(error){
     console.log(error.message);
   })
