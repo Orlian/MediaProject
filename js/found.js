@@ -109,35 +109,89 @@ const openTripKey = "5ae2e3f221c38a28845f05b627e4e3f176dbe8ffe53c291569850faa";
 
 function getLandMarks(crd){
   fetch(`https://api.opentripmap.com/0.1/en/places/radius?radius=20000&lon=${crd.longitude}&lat=${crd.latitude}
-  &format=json&limit=50&apikey=${openTripKey}`).
+  &format=json&limit=100&apikey=${openTripKey}`).
       then(function(response){
         return response.json();
       }).
       then(function(landMarks){
         console.log(landMarks);
+        let randomClue = Math.floor(Math.random() * landMarks.length);
+        console.log(randomClue);
         for(let i = 0; i < landMarks.length; i++){
           const coordinates = {
             'lat': landMarks[i].point.lat,
             'lon': landMarks[i].point.lon
           };
-          if(landMarks[i].name === '' || landMarks[i].name === null){
+          if((landMarks[i].name === '' || landMarks[i].name === null) && i === randomClue){
+            if(randomClue < landMarks.length){
+              randomClue++;
+            }
+            else{
+              console.log('Arvo uudestaan!');
+            }
+          }
+          else if(landMarks[i].name === '' || landMarks[i].name === null){
 
           }
-          else{
-            const info = `<h3>${landMarks[i].name}<br/>Lat: ${coordinates.lat} Lon: ${coordinates.lon}</h3>`;
-            addMarker(coordinates, info, landMarks[i]);
+          else {
+            if(randomClue === i){
+              const info = `<h3>${landMarks[i].name}<br/>Lat: ${coordinates.lat} Lon: ${coordinates.lon}</h3>`;
+              addMarker(coordinates, info, landMarks[i], true);
+              openClue(coordinates);
+            }
+            else{
+              const info = `<h3>${landMarks[i].name}<br/>Lat: ${coordinates.lat} Lon: ${coordinates.lon}</h3>`;
+              addMarker(coordinates, info, landMarks[i], false);
+            }
           }
         }
       })
 }
-function addMarker(coordinates, info, landMark) {
+const overlay = document.getElementById('overlay');
+overlay.addEventListener('click', () =>{
+  const modals = document.querySelectorAll('.modal.active');
+  modals.forEach(modal => {
+    closeModal(modal);
+  })
+});
+
+function addMarker(coordinates, info, landMark, clue) {
   L.marker([coordinates.lat, coordinates.lon])
   .addTo(map)
   .bindPopup(info)
   .on('click', function(){
-    //Tänne jotain hauskaa vielä
+    if(clue){
+      const modal = document.getElementById('modal');
+      const modalText = document.querySelector('.modal_body');
+      modalText.innerHTML = `Löysit minut! Hyvää työtä! Nyt voit tuntea syvää tyytyväisyyttä itseesi`;
+      openModal(modal);
+    }
   });
 }
+
+function openClue(crd){
+  const modalText = document.querySelector('.modal_body');
+  modalText.innerHTML = `Tylsä vihjeesi on seuraava: lat ${crd.lat} lon ${crd.lon}`;
+  const modal = document.getElementById('modal');
+  openModal(modal);
+}
+
+function openModal(modal){
+  if(modal === null) {
+    return;
+  }
+  modal.classList.add('active');
+  overlay.classList.add('active');
+}
+
+function closeModal(modal){
+  if(modal === null) {
+    return;
+  }
+  modal.classList.remove('active');
+  overlay.classList.remove('active');
+}
+
 const redIcon = new L.Icon({
   iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
@@ -153,15 +207,6 @@ function youAreHere(coordinates) {
 }
 
 /////// Nähtävyyksien haku loppuu ////////
-
-/////// Etsintä alkaa ///////
-let currentClue = '';
-
-function getNextClue() {
-
-}
-
-/////// Etsintä loppuu ///////
 
 /////// Gps-paikannus ///////
 
