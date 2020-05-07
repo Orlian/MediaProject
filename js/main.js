@@ -2,16 +2,17 @@
 
 ////// Leaflet kartta //////
 
-const map = L.map('mapid'); //perus leaflet kartta
+//const map = L.map('mapid'); //perus leaflet kartta
 
 let myPos = null;
 const googleKey = 'AIzaSyB022qL0H1EcgjrunZEr0p1ZZHeZwbNhjM';
 
 //Perus tile layer, ruma kuin synti, voi vaihtaa halutessa
+/*
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
-
+*/
 //Lisää Google Maps layerin kartalle (dark-mode tyylittelyn kera)
 /*
 let roads = L.gridLayer.googleMutant({
@@ -165,10 +166,10 @@ const options = {
 function success(pos) {
   myPos = pos.coords;
 //Haetaan kartta nykyisillä koordinaateilla
-  map.setView([myPos.latitude, myPos.longitude], 13);
+  //map.setView([myPos.latitude, myPos.longitude], 13);
   getCurrentWeather(myPos);
-  getLandMarks(myPos);
-  youAreHere(myPos);
+  //getLandMarks(myPos);
+  //youAreHere(myPos);
 }
 
 //Paikkatietoja ei löydy
