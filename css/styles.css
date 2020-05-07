@@ -12,26 +12,9 @@ header h1{
     font-family: "Playfair Display", serif;
     font-size: 70px;
 }
-.collapsible {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 15px;
-}
-.content {
-    padding: 0 18px;
-    display: none;
-    overflow: hidden;
-    background-color: #f1f1f1;
-    transition: max-height 0.2s ease-out;
-}
-.active, .collapsible:hover {
-    background-color: #ccc;
+h1{
+    color: #35ff36;
+    font-family: "Playfair Display", serif;
 }
 
 #mapid{
@@ -55,20 +38,21 @@ header h1{
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
+    font-family: Play, serif;
 }
 #city{
     font-weight: bold;
 }
-
+.galleria ul{
+    list-style-type: none;
+}
 
 #navigation_bar{
     width: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    border-style: groove;
-    border-color: black;
-    background-color: #aceb98;
+
 }
 nav ul{
     list-style-type: none;
@@ -86,7 +70,7 @@ nav a:link, nav a:visited{
     text-align: center;
     text-decoration: none;
     padding: 10px 10px 10px 10px;
-    background-color: #bfc0c0;
+    background-color: #5a5a66;
     width: 95%;
     color: #2a2b2e;
 }
@@ -111,6 +95,32 @@ p{
 }
 #video_box{
     padding: 15%;
+}
+#kysymys_list ul {
+    list-style-type: none;
+    padding: 0;
+}
+.collapsible {
+    background-color: #5a5a66;
+    color: #2a2b2e;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+.content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+}
+.active, .collapsible:hover {
+    background-color: #bfc0c0;
 }
 
 /*
