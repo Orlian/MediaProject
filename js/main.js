@@ -184,7 +184,7 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 /////// Paikallisen sään hakeminen ///////
 
 function getCurrentWeather(crd) {
-  fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&units=metric&APPID=ecb61f924f197bcf5abcfe9b08094bca`).
+  fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${crd.latitude}&lon=${crd.longitude}&units=metric&APPID=ecb61f924f197bcf5abcfe9b08094bca`).
       then(function(vastaus) {
         console.log(vastaus);
         return vastaus.json();
@@ -198,7 +198,7 @@ function getCurrentWeather(crd) {
         document.querySelector('#wind_speed').innerHTML = 'Wind speed: ' + data.wind.speed + 'm/s';
         document.querySelector('#humidity').innerHTML = 'Humidity: ' + data.main.humidity + '%';
         document.querySelector('#air_pressure').innerHTML = 'Air pressure: ' + data.main.pressure + 'hPa';
-        document.querySelector('#visibility').innerHTML = 'Visibility: ' + (data.visibility / 1000) + 'km';
+        //document.querySelector('#visibility').innerHTML = 'Visibility: ' + data.visibility + 'm';
       }).catch(function(error){
     console.log(error.message);
   })

@@ -154,6 +154,15 @@ function youAreHere(coordinates) {
 
 /////// Nähtävyyksien haku loppuu ////////
 
+/////// Etsintä alkaa ///////
+let currentClue = '';
+
+function getNextClue() {
+
+}
+
+/////// Etsintä loppuu ///////
+
 /////// Gps-paikannus ///////
 
 const options = {
@@ -178,6 +187,7 @@ function error(err) {
 navigator.geolocation.getCurrentPosition(success, error, options);
 
 /////// Gps-paikannus loppuu ///////
+
 /////// Kello ////////
 
 //Nappi aloittaa laskurin alusta ja pysäyttää sen
