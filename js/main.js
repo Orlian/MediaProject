@@ -105,7 +105,7 @@ function replacePlaylist(){
   const element = document.getElementById("video");
   const playlistID = document.getElementById("Playlists").value;
   sessionStorage.setItem('lastUsedPlaylist', playlistID);
-  element.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=${playlistID}" 
+  element.innerHTML = `<iframe id="yt" src="https://www.youtube.com/embed/videoseries?list=${playlistID}" 
   frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
 }
 
@@ -118,7 +118,7 @@ if (lastPlaylists != null && lastUsedPlaylist != null){
     const video = document.getElementById("video");
     const playlistID = lastUsedPlaylist;
 
-    video.innerHTML = `<iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=${playlistID}" 
+    video.innerHTML = `<iframe id="yt" src="https://www.youtube.com/embed/videoseries?list=${playlistID}" 
     frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
 
     const element = document.getElementById("Playlists");
