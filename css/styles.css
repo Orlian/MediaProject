@@ -21,6 +21,11 @@ h1{
     font-family: "EB Garamond", serif;
     padding-left: 2%;
 }
+h2{
+    color: #bfc0c0;
+    font-family: Play, serif;
+    padding-left: 2%;
+}
 
 #mapid{
     margin: 20px 10%;
