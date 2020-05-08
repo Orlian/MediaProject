@@ -147,6 +147,8 @@ function getLandMarks(crd){
         }
       })
 }
+
+////// Etsintä osio ////////
 const overlay = document.getElementById('overlay');
 overlay.addEventListener('click', () =>{
   const modals = document.querySelectorAll('.modal.active');
@@ -191,6 +193,8 @@ function closeModal(modal){
   modal.classList.remove('active');
   overlay.classList.remove('active');
 }
+
+/////// Etsintä osio loppuu ///////
 
 const redIcon = new L.Icon({
   iconUrl: 'https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
